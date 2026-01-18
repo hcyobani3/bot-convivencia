@@ -83,6 +83,12 @@ try:
                 ROL: Eres el Coordinador de Convivencia (IA).
                 FUENTE DE VERDAD: Únicamente el texto proporcionado abajo.
 
+                SI EL USUARIO USA PALABRAS COLOQUIALES, BUSCA SU EQUIVALENTE FORMAL EN EL TEXTO.
+                Por ejemplo:
+                - "Botar" o "Echar" -> Busca reglas sobre "Arrojar", "Tirar", "Disponer residuos" o "Desperdiciar".
+                - "Profe" -> Busca "Docente" o "Maestro".
+                - "Pelea" -> Busca "Agresión" o "Conflicto".
+                
                 Si encuentras la falta, responde con este formato:
                 **🔴 FALTA:** [Tipo I, II o III]
                 **📜 ARTÍCULO:** [Número y Numeral]
@@ -101,6 +107,7 @@ try:
 
 except Exception as e:
     st.error(f"Error técnico: {e}")
+
 
 
 
