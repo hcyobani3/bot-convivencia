@@ -16,6 +16,27 @@ from langchain_google_genai import ChatGoogleGenerativeAI, GoogleGenerativeAIEmb
 from langchain_chroma import Chroma
 from langchain.chains import RetrievalQA
 
+# --- 🟢 PEGA ESTO AQUÍ (Zona de Funciones) ---
+def normalizar_pregunta(texto):
+    """Traduce jerga estudiantil a lenguaje técnico del manual"""
+    texto = texto.lower() 
+    diccionario = {
+        "botar": "arrojar",
+        "tirar": "arrojar",
+        "basura": "residuos",
+        "pelea": "agresión física",
+        "golpear": "agresión física",
+        "profe": "docente",
+        "celu": "dispositivo móvil",
+        "capar clase": "evasión de clases"
+    }
+    
+    for palabra_calle, palabra_tecnica in diccionario.items():
+        if palabra_calle in texto:
+            texto = texto.replace(palabra_calle, palabra_tecnica)
+    return texto
+# ---------------------------------------------
+
 # --- 2. CONFIGURACIÓN E INTERFAZ MÓVIL ---
 st.set_page_config(page_title="Coordinador IA", page_icon="👮‍♂️", layout="centered", initial_sidebar_state="collapsed")
 
@@ -73,6 +94,8 @@ try:
 
     if st.button("🔍 Consultar Manual"):
         if pregunta:
+            # 1. Primero traducimos lo que escribió el estudiante
+            pregunta_traducida = normalizar_pregunta(pregunta_usuario)
             with st.spinner('Analizando el reglamento... 📜'):
                 prompt_sistema = f"""
                 INSTRUCCIÓN DE SEGURIDAD PRIORITARIA:
@@ -107,6 +130,7 @@ try:
 
 except Exception as e:
     st.error(f"Error técnico: {e}")
+
 
 
 
