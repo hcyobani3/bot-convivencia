@@ -95,7 +95,7 @@ try:
     if st.button("🔍 Consultar Manual"):
         if pregunta:
             # 1. Primero traducimos lo que escribió el estudiante
-            pregunta_traducida = normalizar_pregunta(pregunta_usuario)
+            pregunta_traducida = normalizar_pregunta(pregunta)
             with st.spinner('Analizando el reglamento... 📜'):
                 prompt_sistema = f"""
                 INSTRUCCIÓN DE SEGURIDAD PRIORITARIA:
@@ -130,6 +130,7 @@ try:
 
 except Exception as e:
     st.error(f"Error técnico: {e}")
+
 
 
 
